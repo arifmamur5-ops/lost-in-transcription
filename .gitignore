@@ -31,3 +31,17 @@ tracks/*/data/
 *.bin
 *.safetensors
 checkpoint-*/
+
+# Model Weights & Checkpoints
+*.safetensors
+*.bin
+*.pt
+checkpoints/
+
+# Raw Datasets & Audio
+*.mp3
+*.wav
+*.cha
+*.tsv
+*.csv
+temp_*
