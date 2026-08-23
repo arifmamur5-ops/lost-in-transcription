@@ -1,44 +1,15 @@
 
-*.csv
-*.tsv
-*.wav
-*.mp3
-data/
-tracks/*/data/
-*.ckpt
-*.bin
-*.safetensors
-checkpoint-*/
-
-*.csv
-*.tsv
-*.wav
-*.mp3
-data/
-tracks/*/data/
-*.ckpt
-*.bin
-*.safetensors
-checkpoint-*/
-
-*.csv
-*.tsv
-*.wav
-*.mp3
-data/
-tracks/*/data/
-*.ckpt
-*.bin
-*.safetensors
-checkpoint-*/
-
-# Model Weights & Checkpoints
+# Model Weights & Artifacts (Stored externally in Drive/Kaggle)
 *.safetensors
 *.bin
 *.pt
+adapter_config.json
+processor_config.json
+tokenizer.json
+tokenizer_config.json
 checkpoints/
 
-# Raw Datasets & Audio
+# Raw Data & Audio Slices
 *.mp3
 *.wav
 *.cha
