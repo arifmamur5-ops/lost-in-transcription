@@ -3,13 +3,9 @@ tracks/es-en/train_lora.py
 Training pipeline for fine-tuning Whisper Large-v3 on Miami Bangor (Spanish-English Code-Switching) using PEFT LoRA.
 """
 import os
-import glob
 import re
-import gc
-import random
 import torch
 import torchaudio
-from pydub import AudioSegment
 from torch.utils.data import Dataset as TorchDataset
 from dataclasses import dataclass
 from typing import Any, Dict, List
@@ -99,7 +95,7 @@ def main():
         save_total_limit=1,
         report_to=["none"]
     )
-    print("Trainer siap dijalankan dengan dataset Miami Bangor.")
+    print("Trainer configuration initialized for Miami Bangor training.")
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,6 @@
 """
 tracks/es-en/inference.py
-Inference pipeline for Spanish-English Code-Switching ASR.
+Inference & Evaluation pipeline for Spanish-English Code-Switching ASR.
 """
 import os
 import re
@@ -24,6 +24,7 @@ class WhisperBilingualPipeline:
         
         if adapter_path and os.path.exists(adapter_path):
             self.model = PeftModel.from_pretrained(base_model, adapter_path)
+            print(f"Loaded LoRA Adapter from: {adapter_path}")
         else:
             self.model = base_model
             
@@ -45,14 +46,21 @@ class WhisperBilingualPipeline:
         if sr != 16000:
             waveform = torchaudio.functional.resample(waveform, sr, 16000)
             
-        audio_data = waveform.squeeze().numpy()
         inputs = self.processor.feature_extractor(
-            audio_data, 
+            waveform.squeeze().numpy(), 
             sampling_rate=16000, 
             return_tensors="pt"
         ).input_features.to(self.device).to(torch.float16 if self.device == "cuda" else torch.float32)
         
-        gen_kwargs = {"max_length": 128, "task": "transcribe", "num_beams": 1, "do_sample": False}
+        gen_kwargs = {
+            "max_length": 128, 
+            "task": "transcribe", 
+            "num_beams": 1, 
+            "do_sample": False,
+            "condition_on_prev_tokens": False,
+            "repetition_penalty": 1.2,
+            "no_repeat_ngram_size": 3
+        }
         if language:
             gen_kwargs["language"] = language
             
